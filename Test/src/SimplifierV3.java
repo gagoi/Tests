@@ -1,6 +1,6 @@
 public class SimplifierV3 {
 	private double x, y;
-	private int commonDiv;
+	private int commonDiv = 1;
 
 	public SimplifierV3(double x, double y) {
 		toFraction(x, y);
