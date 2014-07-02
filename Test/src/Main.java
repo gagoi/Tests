@@ -6,6 +6,7 @@ public class Main {
 		// SimplifierV2 s2 = new SimplifierV2(250, 1250);
 		// System.out.println(s2.getReponse());
 
-		SimplifierV3 s3 = new SimplifierV3(250, 1250);
+		SimplifierV3 s3 = new SimplifierV3(250.4545, 1250);
+		System.out.println("Diviseur commun = " + s3.getCommonDiv());
 	}
 }

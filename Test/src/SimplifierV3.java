@@ -1,9 +1,12 @@
 public class SimplifierV3 {
-	private int divCommon;
-	public SimplifierV3(float x, float y) {
-		float min = Math.min(x, y);
-		float test = x/y, testX, testY;
-		if(test == (int) test) {
+	private double x, y;
+	private int commonDiv;
+
+	public SimplifierV3(double x, double y) {
+		toFraction(x, y);
+		double min = Math.min(x, y);
+		double test = x / y, testX, testY;
+		if (test == (int) test) {
 			System.out.println("On peut diviser, donc la fraction vaut : " + test);
 			return;
 		}
@@ -11,14 +14,23 @@ public class SimplifierV3 {
 			testX = x / i;
 			testY = y / i;
 			System.out.println(i + " - " + testX + " - " + testY);
-			if(testX == (int) testX && testY == (int) testY) {
-				this.divCommon = i;
+			if (testX == (int) testX && testY == (int) testY) {
+				this.commonDiv = i;
 				return;
 			}
 		}
 	}
 
-	public int getDivCommon(){
-		return this.divCommon;
+	public void toFraction(double x, double y) {
+		this.x = x;
+		this.y = y;
+		while (this.x == (int) this.x && this.y == (int) this.y) {
+			this.x *= 10;
+			this.y *= 10;
+		}
+	}
+
+	public int getCommonDiv() {
+		return this.commonDiv;
 	}
 }
