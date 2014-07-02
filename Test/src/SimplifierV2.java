@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 
 public class SimplifierV2 {
 	private float x, y;
 	private int[] nbPrime = { 31, 29, 23, 19, 17, 13, 11, 7, 5, 3, 2 };
 	private int i = nbPrime.length - 1;
-	private int xFinal, yFinal, intFinal;
+	private int intFinal;
 
 	// x = numerateur && y = denominateur
 	public SimplifierV2(float x, float y) {
@@ -18,17 +17,19 @@ public class SimplifierV2 {
 		}
 
 		System.out.println(this.x + " - " + this.y);
-		for (int i = 0; i <= this.i; i++) {
-			xTemp = this.x / nbPrime[i];
-			yTemp = this.y / nbPrime[i];
-			System.out.println("i=" + i + "  |  nbPrime : " + nbPrime[i] + "  |  x Temp : " + xTemp + "  |  y temp : " + yTemp);
-			if (xTemp == (int) xTemp && yTemp == (int) yTemp) {
-				this.i = i;
-				this.xFinal = (int) xTemp;
-				this.yFinal = (int) yTemp;
-				break;
-			}
+		while (canBeSimplied()) {
+			for (int i = 0; i <= this.i; i++) {
+				xTemp = this.x / nbPrime[i];
+				yTemp = this.y / nbPrime[i];
+				System.out.println("i=" + i + "  |  nbPrime : " + nbPrime[i] + "  |  x Temp : " + xTemp + "  |  y temp : " + yTemp);
+				if (xTemp == (int) xTemp && yTemp == (int) yTemp) {
+					this.i = i;
+					this.x = xTemp;
+					this.y = yTemp;
+					break;
+				}
 
+			}
 		}
 	}
 
@@ -41,13 +42,25 @@ public class SimplifierV2 {
 	}
 
 	public String getFinal() {
-		return (xFinal + " - " + yFinal + " - " + intFinal);
+		return (x + " - " + y + " - " + intFinal);
 	}
 
 	public String getReponse() {
 		if (intFinal == 0)
-			return (xFinal + " - " + yFinal);
+			return (x + " - " + y);
 		else
 			return intFinal + "";
+	}
+
+	private boolean canBeSimplied() {
+		for (int i = 0; i <= this.i; i++) {
+			float xTemp = this.x / nbPrime[i];
+			float yTemp = this.y / nbPrime[i];
+			System.out.println("i=" + i + "  |  nbPrime : " + nbPrime[i] + "  |  x Temp : " + xTemp + "  |  y temp : " + yTemp);
+			if (xTemp == (int) xTemp && yTemp == (int) yTemp) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
